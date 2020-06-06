@@ -6,7 +6,7 @@ function Results() {
     <div className="Results">
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          <p>Results page.</p>
+          <p>Results</p>
         </div>
       </div>
     </div>

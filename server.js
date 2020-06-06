@@ -18,6 +18,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
   useFindAndModify: false,
 });
 
+require("./routes/api")(app);
+
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

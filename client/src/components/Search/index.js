@@ -6,7 +6,7 @@ function Search() {
     <div className="Search">
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          <p>Search page.</p>
+          <p>Search</p>
         </div>
       </div>
     </div>
