@@ -1,9 +1,11 @@
 import React from "react";
 import { find } from "../../index"
-import { newEmployeeRow } from "../../index"
 import "./style.css";
 
 function Search() {
+
+  find()
+
   return (
     <div className="Search">
       <div className="row">
