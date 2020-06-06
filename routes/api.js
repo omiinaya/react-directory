@@ -10,4 +10,15 @@ module.exports = function(app) {
             res.json(err)
         })
     })
+
+    app.post("/api/books", function (req, res){
+        documents.create({
+        })
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        })
+    })
 }
