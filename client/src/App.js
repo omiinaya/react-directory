@@ -10,7 +10,6 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Hero />
         <Route exact path="/" component={Search} />
         <Route exact path="/search" component={Search} />
       <Footer />
