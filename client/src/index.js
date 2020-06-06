@@ -9,36 +9,29 @@ ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();
 
 var results;
-var count;
 
 export function find() {
-    var userInput = document.getElementById("search-bar").value;
-    var queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + userInput;
+    var queryURL = "https://randomuser.me/api/?results=200&nat=us";
     return axios
         .get(queryURL).then(response => {
-            results = response.data.items;
-            count = results.length;
-            console.log("number of books: " + count);
-            console.log(results)
-            newBookRow()
-            //updateRowData()
-            return response.data;
+            results = response.data.results
+            console.log(results);
+            newEmployeeRow()
+            //return response.data;
         })
 }
 
-export function newBookRow() {
+export function newEmployeeRow() {
     for (var i = 0; i < results.length; i++) {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div id="book-`+i+`
-            <p id="title-`+i+`">Title: `+results[i].volumeInfo.title+`</p>
-            <p id="author-`+i+`">Author: `+results[i].volumeInfo.authors[0]+`</p>
+        <div id="employee-`+i+`
+            <p id="first-name-`+i+`">Name: `+results[i].name.first+" "+results[i].name.last+`</p>
+            <p id="number-`+i+`">Cell: `+results[i].cell+`</p>
+            <p id="email-`+i+`">Email: `+results[i].email+`</p>
+            <img id="image-`+i+`" src="`+results[i].picture.thumbnail+`">
         </div>
         `;
         document.getElementById('content').appendChild(div);
     }
-}
-
-export function updateRowData() {
-    document.getElementById("title-").innerText = results[0].volumeInfo.title;
 }
