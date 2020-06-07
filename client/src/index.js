@@ -176,3 +176,17 @@ export function filteredMoreThan() {
         document.getElementById('content').appendChild(div);
     }
 }
+
+export function ageAscending() {
+    results.sort(function(a,b){
+        return parseFloat(a.dob.age) - parseFloat(b.dob.age);
+    })
+    console.log(results);
+}
+
+export function ageDescending() {
+    results.sort(function(a,b){
+        return parseFloat(b.dob.age) - parseFloat(a.dob.age);
+    })
+    console.log(results);
+}
