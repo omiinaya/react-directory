@@ -7,14 +7,13 @@ body {
 #content {
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-between;
+  justify-content:center;
 }
 
 .card {
   border-style: solid;
   border-width: 2px;
   border-color: black;
-  background-color: #dfddb9;
   margin: 1%;
   width: 20%;
 }
