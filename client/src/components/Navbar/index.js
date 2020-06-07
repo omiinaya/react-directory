@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom'
 import { switchName } from '../../index'
 import { switchGender } from '../../index'
 import { switchAge } from '../../index'

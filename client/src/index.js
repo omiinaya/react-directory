@@ -11,6 +11,8 @@ registerServiceWorker();
 var results;
 var byGender = [];
 var byCity = [];
+var byState = [];
+var byPostcode = [];
 var isNameSorted = false;
 var isAgeSorted = false;
 
@@ -28,17 +30,17 @@ export function filteredBy(a) {
     document.getElementById('content').innerText = "";
     for (var i = 0; i < a.length; i++) {
         const div = document.createElement('div');
-        div.setAttribute("id","employee-"+i+"")
+        div.setAttribute("id", "employee-" + i + "")
         //div.setAttribute("class","test")
         div.innerHTML = `
         <div class="card">
-            <img id="image-`+i+`" src="`+a[i].picture.thumbnail+`">  
-            <div id="name-`+i+`">Name: `+a[i].name.first+" "+a[i].name.last+`</div>
-            <div id="number-`+i+`">Cell: `+a[i].cell+`</div>
-            <div id="number-`+i+`">City: `+a[i].location.city+`</div>
-            <div id="number-`+i+`">State: `+a[i].location.state+`</div>
-            <div id="number-`+i+`">Age: `+a[i].dob.age+`</div>
-            <div id="email-`+i+`">Email: `+a[i].email+`</div>
+            <img id="image-`+ i + `" src="` + a[i].picture.thumbnail + `">  
+            <div id="name-`+ i + `">Name: ` + a[i].name.first + " " + a[i].name.last + `</div>
+            <div id="number-`+ i + `">Cell: ` + a[i].cell + `</div>
+            <div id="number-`+ i + `">City: ` + a[i].location.city + `</div>
+            <div id="number-`+ i + `">State: ` + a[i].location.state + `</div>
+            <div id="number-`+ i + `">Age: ` + a[i].dob.age + `</div>
+            <div id="email-`+ i + `">Email: ` + a[i].email + `</div>
         </div>
         `;
         document.getElementById('content').appendChild(div);
@@ -68,6 +70,26 @@ export function showFemaleOnly() {
 }
 
 export function showByLocation() {
+    var cityRadio = document.getElementById("radio-city").checked
+    var stateRadio = document.getElementById("radio-state").checked
+    var postcodeRadio = document.getElementById("radio-postcode").checked
+    if (cityRadio) {
+        searchByCity()
+    }
+    else if (stateRadio) {
+        searchByState()
+    }
+    else if (postcodeRadio) {
+        //test()
+        searchByPostcode()
+    }
+    else {
+        document.getElementById("radio-city").checked = true;
+        searchByCity()
+    }
+}
+
+export function searchByCity() {
     byCity = [];
     var input = document.getElementById('input-bar').value;
     for (var i = 0; i < results.length; i++) {
@@ -78,9 +100,31 @@ export function showByLocation() {
     filteredBy(byCity)
 }
 
+export function searchByState() {
+    byState = [];
+    var input = document.getElementById('input-bar').value;
+    for (var i = 0; i < results.length; i++) {
+        if (results[i].location.state === input) {
+            byState.push(results[i]);
+        }
+    }
+    filteredBy(byState)
+}
+
+export function searchByPostcode() {
+    byPostcode = [];
+    var input = document.getElementById('input-bar').value;
+    for (var i = 0; i < results.length; i++) {
+        if (results[i].location.postcode == input) {
+            byPostcode.push(results[i]);
+        }
+    }
+    filteredBy(byPostcode)
+}
+
 export function ageAscending() {
     isAgeSorted = true;
-    results.sort(function(a,b){
+    results.sort(function (a, b) {
         return parseFloat(a.dob.age) - parseFloat(b.dob.age);
     })
     filteredBy(results)
@@ -89,7 +133,7 @@ export function ageAscending() {
 
 export function ageDescending() {
     isAgeSorted = true;
-    results.sort(function(a,b){
+    results.sort(function (a, b) {
         return parseFloat(b.dob.age) - parseFloat(a.dob.age);
     })
     filteredBy(results)
@@ -98,7 +142,7 @@ export function ageDescending() {
 
 export function nameAscending() {
     isNameSorted = true;
-    results.sort(function(a,b){
+    results.sort(function (a, b) {
         var textA = a.name.first;
         var textB = b.name.first;
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -109,7 +153,7 @@ export function nameAscending() {
 
 export function nameDescending() {
     isNameSorted = true;
-    results.sort(function(a,b){
+    results.sort(function (a, b) {
         var textA = b.name.first;
         var textB = a.name.first;
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -151,7 +195,7 @@ export function switchName() {
     }
     else if (isNameSorted === true && currentFirst.charAt(0) === 'A') {
         nameDescending()
-    } 
+    }
     else if (isNameSorted === true && !(currentFirst.charAt(0) === 'A')) {
         nameAscending()
     }
