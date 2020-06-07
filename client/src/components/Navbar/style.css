@@ -1,4 +1,26 @@
 .Navbar {
     border-style: solid;
     border-width: 2px;
+    border-color: black;
+    margin: 1%;
+}
+
+ul { 
+    display: inline-block; 
+    list-style-type: none;
+}
+
+#switch-name-text:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#switch-age-text:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#switch-gender-text:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
