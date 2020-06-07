@@ -28,8 +28,8 @@ export function filteredBy(a) {
     for (var i = 0; i < a.length; i++) {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+a[i].name.first+" "+a[i].name.last+`</p>
+        <div id="employee-`+i+`>   
+            <p id="name-`+i+`">Name: `+a[i].name.first+" "+a[i].name.last+`</p>
             <p id="number-`+i+`">Cell: `+a[i].cell+`</p>
             <p id="email-`+i+`">Email: `+a[i].email+`</p>
             <img id="image-`+i+`" src="`+a[i].picture.thumbnail+`">
@@ -117,14 +117,14 @@ export function ageAscending() {
     results.sort(function(a,b){
         return parseFloat(a.dob.age) - parseFloat(b.dob.age);
     })
-    console.log(results);
+    filteredBy(results)
 }
 
 export function ageDescending() {
     results.sort(function(a,b){
         return parseFloat(b.dob.age) - parseFloat(a.dob.age);
     })
-    console.log(results);
+    filteredBy(results)
 }
 
 export function nameAscending() {
@@ -133,7 +133,7 @@ export function nameAscending() {
         var textB = b.name.first;
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
-    console.log(results);
+    filteredBy(results)
 }
 
 export function nameDescending() {
@@ -142,5 +142,5 @@ export function nameDescending() {
         var textB = a.name.first;
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
-    console.log(results);
+    filteredBy(results)
 }
