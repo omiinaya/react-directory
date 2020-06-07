@@ -19,20 +19,20 @@ export function find() {
         .get(queryURL).then(response => {
             results = response.data.results
             console.log(results);
-            newEmployeeRow()
-            //return response.data;
+            filteredBy(results)
         })
 }
 
-export function newEmployeeRow() {
-    for (var i = 0; i < results.length; i++) {
+export function filteredBy(a) {
+    document.getElementById('content').innerText = "";
+    for (var i = 0; i < a.length; i++) {
         const div = document.createElement('div');
         div.innerHTML = `
         <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+results[i].name.first+" "+results[i].name.last+`</p>
-            <p id="number-`+i+`">Cell: `+results[i].cell+`</p>
-            <p id="email-`+i+`">Email: `+results[i].email+`</p>
-            <img id="image-`+i+`" src="`+results[i].picture.thumbnail+`">
+            <p id="first-name-`+i+`">Name: `+a[i].name.first+" "+a[i].name.last+`</p>
+            <p id="number-`+i+`">Cell: `+a[i].cell+`</p>
+            <p id="email-`+i+`">Email: `+a[i].email+`</p>
+            <img id="image-`+i+`" src="`+a[i].picture.thumbnail+`">
         </div>
         `;
         document.getElementById('content').appendChild(div);
@@ -46,7 +46,7 @@ export function showMaleOnly() {
             byGender.push(results[i]);
         }
     }
-    filteredMaleRow()
+    filteredGenderRow()
     console.log(byGender);
 }
 
@@ -57,27 +57,11 @@ export function showFemaleOnly() {
             byGender.push(results[i]);
         }
     }
-    filteredFemaleRow()
+    filteredGenderRow()
     console.log(byGender);
 }
 
-export function filteredMaleRow() {
-    document.getElementById('content').innerText = "";
-    for (var i = 0; i < byGender.length; i++) {
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+byGender[i].name.first+" "+byGender[i].name.last+`</p>
-            <p id="number-`+i+`">Cell: `+byGender[i].cell+`</p>
-            <p id="email-`+i+`">Email: `+byGender[i].email+`</p>
-            <img id="image-`+i+`" src="`+byGender[i].picture.thumbnail+`">
-        </div>
-        `;
-        document.getElementById('content').appendChild(div);
-    }
-}
-
-export function filteredFemaleRow() {
+export function filteredGenderRow() {
     document.getElementById('content').innerText = "";
     for (var i = 0; i < byGender.length; i++) {
         const div = document.createElement('div');
@@ -101,24 +85,8 @@ export function showByLocation() {
             byCity.push(results[i]);
         }
     }
-    filteredByCity()
+    filteredBy(byCity)
     console.log(byCity);
-}
-
-export function filteredByCity() {
-    document.getElementById('content').innerText = "";
-    for (var i = 0; i < byCity.length; i++) {
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+byCity[i].name.first+" "+byCity[i].name.last+`</p>
-            <p id="number-`+i+`">Cell: `+byCity[i].cell+`</p>
-            <p id="email-`+i+`">Email: `+byCity[i].email+`</p>
-            <img id="image-`+i+`" src="`+byCity[i].picture.thumbnail+`">
-        </div>
-        `;
-        document.getElementById('content').appendChild(div);
-    }
 }
 
 export function lessThanAge() {
@@ -129,24 +97,8 @@ export function lessThanAge() {
             byAge.push(results[i]);
         }
     }
-    filteredLessThan()
+    filteredBy(byAge)
     console.log(byAge);
-}
-
-export function filteredLessThan() {
-    document.getElementById('content').innerText = "";
-    for (var i = 0; i < byAge.length; i++) {
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+byAge[i].name.first+" "+byAge[i].name.last+`</p>
-            <p id="number-`+i+`">Cell: `+byAge[i].cell+`</p>
-            <p id="email-`+i+`">Email: `+byAge[i].email+`</p>
-            <img id="image-`+i+`" src="`+byAge[i].picture.thumbnail+`">
-        </div>
-        `;
-        document.getElementById('content').appendChild(div);
-    }
 }
 
 export function moreThanAge() {
@@ -157,24 +109,8 @@ export function moreThanAge() {
             byAge.push(results[i]);
         }
     }
-    filteredMoreThan()
+    filteredBy(byAge)
     console.log(byAge);
-}
-
-export function filteredMoreThan() {
-    document.getElementById('content').innerText = "";
-    for (var i = 0; i < byAge.length; i++) {
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+byAge[i].name.first+" "+byAge[i].name.last+`</p>
-            <p id="number-`+i+`">Cell: `+byAge[i].cell+`</p>
-            <p id="email-`+i+`">Email: `+byAge[i].email+`</p>
-            <img id="image-`+i+`" src="`+byAge[i].picture.thumbnail+`">
-        </div>
-        `;
-        document.getElementById('content').appendChild(div);
-    }
 }
 
 export function ageAscending() {
@@ -187,6 +123,24 @@ export function ageAscending() {
 export function ageDescending() {
     results.sort(function(a,b){
         return parseFloat(b.dob.age) - parseFloat(a.dob.age);
+    })
+    console.log(results);
+}
+
+export function nameAscending() {
+    results.sort(function(a,b){
+        var textA = a.name.first;
+        var textB = b.name.first;
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+    console.log(results);
+}
+
+export function nameDescending() {
+    results.sort(function(a,b){
+        var textA = b.name.first;
+        var textB = a.name.first;
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
     console.log(results);
 }
