@@ -30,10 +30,9 @@ export function filteredBy(a) {
     document.getElementById('content').innerText = "";
     for (var i = 0; i < a.length; i++) {
         const div = document.createElement('div');
-        div.setAttribute("id", "employee-" + i + "")
-        //div.setAttribute("class","test")
+        //div.setAttribute("id", "employee-" + i + "")
+        div.setAttribute("class","card")
         div.innerHTML = `
-        <div class="card">
             <img id="image-`+ i + `" src="` + a[i].picture.thumbnail + `">  
             <div id="name-`+ i + `">Name: ` + a[i].name.first + " " + a[i].name.last + `</div>
             <div id="number-`+ i + `">Cell: ` + a[i].cell + `</div>
@@ -41,7 +40,6 @@ export function filteredBy(a) {
             <div id="number-`+ i + `">State: ` + a[i].location.state + `</div>
             <div id="number-`+ i + `">Age: ` + a[i].dob.age + `</div>
             <div id="email-`+ i + `">Email: ` + a[i].email + `</div>
-        </div>
         `;
         document.getElementById('content').appendChild(div);
     }
