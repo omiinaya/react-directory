@@ -57,24 +57,8 @@ export function showFemaleOnly() {
             byGender.push(results[i]);
         }
     }
-    filteredGenderRow()
+    filteredBy(byGender)
     console.log(byGender);
-}
-
-export function filteredGenderRow() {
-    document.getElementById('content').innerText = "";
-    for (var i = 0; i < byGender.length; i++) {
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div id="employee-`+i+`
-            <p id="first-name-`+i+`">Name: `+byGender[i].name.first+" "+byGender[i].name.last+`</p>
-            <p id="number-`+i+`">Cell: `+byGender[i].cell+`</p>
-            <p id="email-`+i+`">Email: `+byGender[i].email+`</p>
-            <img id="image-`+i+`" src="`+byGender[i].picture.thumbnail+`">
-        </div>
-        `;
-        document.getElementById('content').appendChild(div);
-    }
 }
 
 export function showByLocation() {
@@ -87,30 +71,6 @@ export function showByLocation() {
     }
     filteredBy(byCity)
     console.log(byCity);
-}
-
-export function lessThanAge() {
-    byAge = [];
-    var input = document.getElementById('input-bar').value;
-    for (var i = 0; i < results.length; i++) {
-        if (results[i].dob.age <= input) {
-            byAge.push(results[i]);
-        }
-    }
-    filteredBy(byAge)
-    console.log(byAge);
-}
-
-export function moreThanAge() {
-    byAge = [];
-    var input = document.getElementById('input-bar').value;
-    for (var i = 0; i < results.length; i++) {
-        if (results[i].dob.age >= input) {
-            byAge.push(results[i]);
-        }
-    }
-    filteredBy(byAge)
-    console.log(byAge);
 }
 
 export function ageAscending() {

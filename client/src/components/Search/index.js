@@ -3,8 +3,6 @@ import { find } from "../../index"
 import { showMaleOnly } from "../../index"
 import { showFemaleOnly } from "../../index"
 import { showByLocation } from "../../index"
-import { lessThanAge } from "../../index"
-import { moreThanAge } from "../../index"
 import { ageAscending } from "../../index"
 import { ageDescending } from "../../index"
 import { nameAscending } from "../../index"
@@ -25,8 +23,6 @@ function Search() {
         <button onClick={nameDescending}>Name Descending</button>
         <button onClick={ageAscending}>Age Ascending</button>
         <button onClick={ageDescending}>Age Descending</button>
-        <button onClick={moreThanAge}>Older Than</button>
-        <button onClick={lessThanAge}>Younger Than</button>
         <button onClick={showByLocation}>City</button>
         <button onClick={showMaleOnly}>Male</button>
         <button onClick={showFemaleOnly}>Female</button>
