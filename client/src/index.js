@@ -46,8 +46,7 @@ export function showMaleOnly() {
             byGender.push(results[i]);
         }
     }
-    filteredGenderRow()
-    console.log(byGender);
+    filteredBy(byGender)
 }
 
 export function showFemaleOnly() {
@@ -58,7 +57,6 @@ export function showFemaleOnly() {
         }
     }
     filteredBy(byGender)
-    console.log(byGender);
 }
 
 export function showByLocation() {
@@ -70,7 +68,6 @@ export function showByLocation() {
         }
     }
     filteredBy(byCity)
-    console.log(byCity);
 }
 
 export function ageAscending() {
