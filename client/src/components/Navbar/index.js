@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { testing } from '../../index'
+import { switchName } from '../../index'
 import { switchGender } from '../../index'
 import { switchAge } from '../../index'
 import "./style.css";
@@ -15,7 +15,7 @@ function Navbar() {
             <li><span onClick={switchGender}>Filter by Gender</span></li>
           </ul>
           <ul>
-          <li><span onClick={testing}>Sort by Name</span></li>
+          <li><span onClick={switchName}>Sort by Name</span></li>
             <li><span onClick={switchAge}>Sort by Age</span></li>
           </ul>
         </div>

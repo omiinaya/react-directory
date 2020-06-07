@@ -11,6 +11,8 @@ registerServiceWorker();
 var results;
 var byGender = [];
 var byCity = [];
+var isNameSorted = false;
+var isAgeSorted = false;
 
 export function find() {
     var queryURL = "https://randomuser.me/api/?results=50&nat=us";
@@ -59,7 +61,7 @@ export function showFemaleOnly() {
 }
 
 export function switchGender() {
-    if (byGender.length == 0) {
+    if (byGender.length === 0) {
         showMaleOnly()
     }
     else if (byGender[0].gender === "male") {
@@ -82,6 +84,7 @@ export function showByLocation() {
 }
 
 export function ageAscending() {
+    isAgeSorted = true;
     results.sort(function(a,b){
         return parseFloat(a.dob.age) - parseFloat(b.dob.age);
     })
@@ -89,6 +92,7 @@ export function ageAscending() {
 }
 
 export function ageDescending() {
+    isAgeSorted = true;
     results.sort(function(a,b){
         return parseFloat(b.dob.age) - parseFloat(a.dob.age);
     })
@@ -96,17 +100,21 @@ export function ageDescending() {
 }
 
 export function switchAge() {
-    if (results[0].dob.age < 30) {
+    if (isAgeSorted === false) {
+        ageDescending()
+    }
+    else if (isAgeSorted === true && (results[0].dob.age < 30)) {
         ageDescending()
         console.log(results[0].dob.age)
     }
-    else if (results[0].dob.age > 30) {
+    else if (isAgeSorted === true && (results[0].dob.age > 30)) {
         ageAscending()
         console.log(results[0].dob.age)
     }
 }
 
 export function nameAscending() {
+    isNameSorted = true;
     results.sort(function(a,b){
         var textA = a.name.first;
         var textB = b.name.first;
@@ -116,6 +124,7 @@ export function nameAscending() {
 }
 
 export function nameDescending() {
+    isNameSorted = true;
     results.sort(function(a,b){
         var textA = b.name.first;
         var textB = a.name.first;
@@ -124,6 +133,15 @@ export function nameDescending() {
     filteredBy(results)
 }
 
-export function testing() {
-    console.log("testing")
+export function switchName() {
+    var currentFirst = results[0].name.first;
+    if (isNameSorted === false) {
+        nameAscending()
+    }
+    else if (isNameSorted === true && currentFirst.charAt(0) === 'A') {
+        nameDescending()
+    } 
+    else if (isNameSorted === true && !(currentFirst.charAt(0) === 'A')) {
+        nameAscending()
+    }
 }
