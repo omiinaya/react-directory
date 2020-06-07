@@ -21,7 +21,6 @@ export function start() {
     return axios
         .get(queryURL).then(response => {
             results = response.data.results
-            console.log(results);
             filteredBy(results)
         })
 }
@@ -78,7 +77,6 @@ export function showByLocation() {
         searchByState()
     }
     else if (postcodeRadio) {
-        //test()
         searchByPostcode()
     }
     else {
@@ -178,11 +176,9 @@ export function switchAge() {
     }
     else if (isAgeSorted === true && (results[0].dob.age < 30)) {
         ageDescending()
-        console.log(results[0].dob.age)
     }
     else if (isAgeSorted === true && (results[0].dob.age > 30)) {
         ageAscending()
-        console.log(results[0].dob.age)
     }
 }
 
