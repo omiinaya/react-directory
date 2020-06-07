@@ -11,7 +11,6 @@ registerServiceWorker();
 var results;
 var byGender = [];
 var byCity = [];
-var byAge = [];
 
 export function find() {
     var queryURL = "https://randomuser.me/api/?results=50&nat=us";
@@ -59,6 +58,18 @@ export function showFemaleOnly() {
     filteredBy(byGender)
 }
 
+export function switchGender() {
+    if (byGender.length == 0) {
+        showMaleOnly()
+    }
+    else if (byGender[0].gender === "male") {
+        showFemaleOnly()
+    }
+    else if (byGender[0].gender === "female") {
+        showMaleOnly()
+    }
+}
+
 export function showByLocation() {
     byCity = [];
     var input = document.getElementById('input-bar').value;
@@ -84,6 +95,17 @@ export function ageDescending() {
     filteredBy(results)
 }
 
+export function switchAge() {
+    if (results[0].dob.age < 30) {
+        ageDescending()
+        console.log(results[0].dob.age)
+    }
+    else if (results[0].dob.age > 30) {
+        ageAscending()
+        console.log(results[0].dob.age)
+    }
+}
+
 export function nameAscending() {
     results.sort(function(a,b){
         var textA = a.name.first;
@@ -100,4 +122,8 @@ export function nameDescending() {
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
     filteredBy(results)
+}
+
+export function testing() {
+    console.log("testing")
 }
