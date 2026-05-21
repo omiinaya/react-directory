@@ -13,10 +13,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userdirectory", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/userdirectory",
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  },
+);
 
 require("./routes/api")(app);
 app.use(require("./routes/api.js"));
