@@ -8,20 +8,20 @@ import registerServiceWorker from "./registerServiceWorker";
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();
 
-var results;
-var byGender = [];
-var byCity = [];
-var byState = [];
-var byPostcode = [];
-var isNameSorted = false;
-var isAgeSorted = false;
+let results;
+let byGender = [];
+let byCity = [];
+let byState = [];
+let byPostcode = [];
+let isNameSorted = false;
+let isAgeSorted = false;
 
-var dataLoaded = false;
+let dataLoaded = false;
 
 export function start() {
   if (dataLoaded) return;
   dataLoaded = true;
-  var queryURL = "https://randomuser.me/api/?results=50&nat=us";
+  const queryURL = "https://randomuser.me/api/?results=50&nat=us";
   return axios.get(queryURL).then((response) => {
     results = response.data.results;
     filteredBy(results);
@@ -29,10 +29,10 @@ export function start() {
 }
 
 export function filteredBy(a) {
-  var content = document.getElementById("content");
+  const content = document.getElementById("content");
   if (!content) return;
   content.innerText = "";
-  for (var i = 0; i < a.length; i++) {
+  for (let i = 0; i < a.length; i++) {
     const div = document.createElement("div");
     div.setAttribute("class", "card");
     div.innerHTML =
@@ -81,7 +81,7 @@ export function filteredBy(a) {
 
 export function showMaleOnly() {
   byGender = [];
-  for (var i = 0; i < results.length; i++) {
+  for (let i = 0; i < results.length; i++) {
     if (results[i].gender === "male") {
       byGender.push(results[i]);
     }
@@ -93,7 +93,7 @@ export function showMaleOnly() {
 
 export function showFemaleOnly() {
   byGender = [];
-  for (var i = 0; i < results.length; i++) {
+  for (let i = 0; i < results.length; i++) {
     if (results[i].gender === "female") {
       byGender.push(results[i]);
     }
@@ -104,9 +104,9 @@ export function showFemaleOnly() {
 }
 
 export function showByLocation() {
-  var cityRadio = document.getElementById("radio-city").checked;
-  var stateRadio = document.getElementById("radio-state").checked;
-  var postcodeRadio = document.getElementById("radio-postcode").checked;
+  const cityRadio = document.getElementById("radio-city").checked;
+  const stateRadio = document.getElementById("radio-state").checked;
+  const postcodeRadio = document.getElementById("radio-postcode").checked;
   if (cityRadio) {
     searchByCity();
   } else if (stateRadio) {
@@ -121,8 +121,8 @@ export function showByLocation() {
 
 export function searchByCity() {
   byCity = [];
-  var input = document.getElementById("input-bar").value;
-  for (var i = 0; i < results.length; i++) {
+  const input = document.getElementById("input-bar").value;
+  for (let i = 0; i < results.length; i++) {
     if (results[i].location.city === input) {
       byCity.push(results[i]);
     }
@@ -132,8 +132,8 @@ export function searchByCity() {
 
 export function searchByState() {
   byState = [];
-  var input = document.getElementById("input-bar").value;
-  for (var i = 0; i < results.length; i++) {
+  const input = document.getElementById("input-bar").value;
+  for (let i = 0; i < results.length; i++) {
     if (results[i].location.state === input) {
       byState.push(results[i]);
     }
@@ -143,8 +143,8 @@ export function searchByState() {
 
 export function searchByPostcode() {
   byPostcode = [];
-  var input = document.getElementById("input-bar").value;
-  for (var i = 0; i < results.length; i++) {
+  const input = document.getElementById("input-bar").value;
+  for (let i = 0; i < results.length; i++) {
     if (results[i].location.postcode === input) {
       byPostcode.push(results[i]);
     }
@@ -173,8 +173,8 @@ export function ageDescending() {
 export function nameAscending() {
   isNameSorted = true;
   results.sort(function (a, b) {
-    var textA = a.name.first;
-    var textB = b.name.first;
+    const textA = a.name.first;
+    const textB = b.name.first;
     return textA < textB ? -1 : textA > textB ? 1 : 0;
   });
   filteredBy(results);
@@ -184,8 +184,8 @@ export function nameAscending() {
 export function nameDescending() {
   isNameSorted = true;
   results.sort(function (a, b) {
-    var textA = b.name.first;
-    var textB = a.name.first;
+    const textA = b.name.first;
+    const textB = a.name.first;
     return textA < textB ? -1 : textA > textB ? 1 : 0;
   });
   filteredBy(results);
@@ -213,7 +213,7 @@ export function switchAge() {
 }
 
 export function switchName() {
-  var currentFirst = results[0].name.first;
+  const currentFirst = results[0].name.first;
   if (isNameSorted === false) {
     nameAscending();
   } else if (isNameSorted === true && currentFirst.charAt(0) === "A") {
